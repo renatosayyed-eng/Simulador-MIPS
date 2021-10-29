@@ -1,0 +1,111 @@
+LOAD 1 OK
+$t0 = (endereço += $zero)
+tag = 00000000000000000001000 >> 8 
+indice = 00110 >> 6
+word = 10 >> 2
+byte = 00 >> 0
+bloco_dram = 0000000000000000000100000110 >> 262
+word2 >> byte0 - value
+
+LOAD 2 OK
+$t1 = (endereço += $zero)
+tag =  00000000000000000000010 >> 2 
+indice = 10111 >> 23
+word = 10 >> 2
+byte = 00 >> 0
+bloco_dram = 0000000000000000000001010111 >> 87
+word2 >> byte0 - value
+
+LOAD 3 OK
+$t2 = (endereço += $zero)
+tag =  00000000000000000000110 >> 6 
+indice = 10111 >> 23
+word = 11 >> 3
+byte = 01 >> 1
+bloco_dram = 0000000000000000000011010111 >> 215
+word3 >> byte1 - value
+
+LOAD 4 OK
+$t3 = (endereço += $zero)
+tag =  00000000000000000000001 >> 1 
+indice = 10111 >> 23
+word = 00 >> 0
+byte = 10 >> 2
+bloco_dram = 0000000000000000000000110111 >> 55
+word0 >> byte2 - value
+
+LOAD 5 OK
+$t4 = (endereço += $zero)
+tag =  00000000000000000010101 >> 21 
+indice = 10111 >> 23
+word = 01 >> 1
+byte = 11 >> 3
+bloco_dram = 0000000000000000001010110111 >> 695
+word1 >> byte3 - value
+
+ADD OK
+$s0 = $t0 + $t1
+
+SUB OK
+$s1 = $s0 - $t0
+
+SLT OK
+$t2 = $t1 < $t0
+
+SLL OK
+$t4 = $t0 << 2
+
+SRL OK
+$t3 = $t0 >> 2
+
+AND OK
+$s5 = $t0 & $t1
+
+OR OK
+$s6 = $t0 | $t1
+
+NOR OK
+$s7 = !($t0 | $t1)
+
+J_1 OK
+PC = 15
+
+JAL OK
+RA = PC
+PC = 14
+
+J_2 OK 
+PC = 16 
+
+STORE 1
+endereço += $zero
+Salva $t4 na cache
+tag =  00000000000000000001000 >> 8 
+indice = 00110 >> 6
+word = 10 >> 2
+bloco_dram =   0000000000000000000100000110 >> 262
+word2 >> value
+
+STORE 2
+endereço += $zero
+Salva $t2 na cache
+tag =  00000000000000000001110 >> 14 
+indice = 00110 >> 6
+word = 01 >> 1
+bloco_dram = 0000000000000000000111000110 >> 454
+word1 >> value 
+
+STORE 3
+endereço += $zero
+Salva $t1 na cache
+TAG 0000 0000 0000 0000 0001 001 >> 9
+INDICE 00110 >> 6
+WORD 01 >> 1
+BYTE 00 >> 0
+BLOCO DRAM 0000 0000 0000 0000 0001 00100110 >> 294
+
+BEQ 
+se $s1 == $t1 >> PC = 5
+
+JR
+PC = $RA 
